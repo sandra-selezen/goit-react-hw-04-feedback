@@ -18,15 +18,12 @@ export const App = () => {
 
     switch (name) {
       case 'good':
-        console.log("тицьнули на кнопку good");
         setGood(prevState => prevState + 1);
         break;
       case 'neutral':
-        console.log("тицьнули на кнопку neutral");
         setNeutral(prevState => prevState + 1);
         break;
       case 'bad':
-        console.log("тицьнули на кнопку bad");
         setBad(prevState => prevState + 1);
         break;
       default:
