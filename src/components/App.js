@@ -35,13 +35,9 @@ export const App = () => {
     setTotal(total => good + bad + neutral)
   }, [good, neutral, bad]);
 
-
-  // const positivePercentage = () => {
-
-  //   const positivePercentage = Number(((good / totalFeedback()) * 100).toFixed());
-  //   return positivePercentage;
-  // }
-  
+  useEffect(() => {
+    setPositivePercentage(positivePercentage => Number(((good / total) * 100).toFixed()))
+  }, [good, total]);
 
     return (
       <Layout>
@@ -49,14 +45,10 @@ export const App = () => {
           <FeedbackOptions options={["good", "neutral", "bad"]} onClick={onLeaveFeedback} />
         </Section>
         <Section title="Statistics">
-          <Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage={positivePercentage} />
+          {total !== 0
+            ? <Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage={positivePercentage} />
+            : <Notification message="There is no feedback" />}
         </Section>
-        {/* <Section title="Statistics">
-          {totalFeedback() !== 0
-            ? <Statistics good={good} neutral={neutral} bad={bad}  />
-            : <Notification message="There is no feedback" />
-          }
-        </Section> */}
         <GlobalStyle />
       </Layout>
   );
