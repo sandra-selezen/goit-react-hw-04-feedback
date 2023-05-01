@@ -36,7 +36,10 @@ export const App = () => {
   }, [good, neutral, bad]);
 
   useEffect(() => {
-    setPositivePercentage(positivePercentage => Number(((good / total) * 100).toFixed()))
+    if (good === 0) {
+      return;
+    }
+    setPositivePercentage(positivePercentage => Number(((good / total) * 100).toFixed()));
   }, [good, total]);
 
     return (
