@@ -10,7 +10,8 @@ export const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-
+  const [total, setTotal] = useState(0);
+  const [positivePercentage, setPositivePercentage] = useState(0);
 
   const onLeaveFeedback = event => {
     const { name } = event.target;
@@ -31,25 +32,12 @@ export const App = () => {
       default:
         return;
     }
-
   }
-  // useEffect(() => {
-  //   setGood(prevState => prevState + 1)
-  // }, [good])
 
-  // useEffect(() => {
-  //   setNeutral(prevState => prevState + 1)
-  // }, [neutral])
+  useEffect(() => {
+    setTotal(total => good + bad + neutral)
+  }, [good, neutral, bad]);
 
-  // useEffect(() => {
-  //   setBad(prevState => prevState + 1)
-  // }, [bad])
-
-  // const totalFeedback = () => {
-
-  //   const total = good + neutral + bad;
-  //   return total;
-  // }
 
   // const positivePercentage = () => {
 
@@ -64,7 +52,7 @@ export const App = () => {
           <FeedbackOptions options={["good", "neutral", "bad"]} onClick={onLeaveFeedback} />
         </Section>
         <Section title="Statistics">
-          <Statistics good={good} neutral={neutral} bad={bad} />
+          <Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage={positivePercentage} />
         </Section>
         {/* <Section title="Statistics">
           {totalFeedback() !== 0
